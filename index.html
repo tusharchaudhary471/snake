@@ -1,0 +1,165 @@
+<html>
+    <head>
+    	<title>Snake</title>
+    	<style>
+    	body{
+    		margin:0;
+    	}
+    	#main{
+    		position: relative;
+    		width:600px;
+    		height:600px;
+    		background-color: black;
+
+
+    	}
+    	#snake{
+    		position:absolute;
+    		width:30px;
+    		height:30px;
+    		background-color: darkgreen;
+    		z-index: 100;
+
+    	}
+    	#food{
+    		position:absolute;
+    		width:30px;
+    		height:30px;
+    		background-color: red;
+    		border-radius: 50px;
+    		background:url("https://cdn2.iconfinder.com/data/icons/bright-cafe/512/fruits-512.png");
+    		background-size: cover;
+    		background-position: center;
+
+    		
+
+    	}
+    	#info{
+    		width: 600px;
+    		height: 50px;
+    		background-color: #eee;
+    		font-size: 28px;
+    		line-height: 50px;
+    		text-align: center;
+    	}
+
+
+        </style>
+	
+    </head>
+    <body>
+    	<div id="main">
+    		<div id="food"></div>
+    		<div id="snake"></div>
+    	</div>
+    	<div id="info">0</div>	
+    	<script>
+    		var posX=0;
+    		var posY=0;
+
+    		var fX=0;
+    		var fY=0;
+
+    		var vX=30;
+    		var vY=0;
+
+    		var score=0;
+
+    		document.onkeydown=divDir;
+
+    		function divDir(e){
+    			if(e.keyCode==37){
+    				vX=-30;
+    				vY=0;
+
+    			}
+    			if(e.keyCode==38){
+    				vX=0;
+    				vY=-30;
+
+    			}
+    			if(e.keyCode==39){
+    				vX=30;
+    				vY=0;
+
+    			}
+    			if(e.keyCode==40){
+    				vX=0;
+    				vY=30;
+
+    			}
+    		}
+
+            function start(){
+            	drawFood();
+            	setInterval(move,100);
+            }
+
+            start();
+
+            function drawFood(){
+            	fX=Math.floor(Math.random()*19)*30;
+            	fY=Math.floor(Math.random()*19)*30;
+            	document.getElementById("food").style.left=fX+"px";
+    			document.getElementById("food").style.top=fY+"px";
+            }
+            
+
+            function updatescore(){
+            	document.getElementById("info").innerHTML=score; 
+            }
+
+
+    		function move(){
+    			posX=posX+vX;
+    			posY=posY+vY;
+
+    			if(posX==fX && posY==fY){
+    				score++;
+    				drawFood();
+    				updatescore();
+    			}
+
+    			if(posX>570){
+    				score=0;
+    				posX=0;
+    				updatescore();
+    			}
+    			if(posX<0){
+    				score=0;
+    				posX=570;
+    				updatescore();
+    			}
+    			if(posY>570){
+    				score=0;
+    				posY=0;
+    				updatescore();
+    			}
+    			if(posY<0){
+    				score=0;
+    				posY=570;
+    				updatescore();
+    			}
+    			document.getElementById("snake").style.left=posX+"px";
+    			document.getElementById("snake").style.top=posY+"px";
+    		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    	</script>	
+    </body>	
+</html>
